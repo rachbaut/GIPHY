@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime</title>
+</head>
+<body>
+    <button id="new-anime">New Anime</button>
+    <div id="images">
+    </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+
+         //need to make a make an event listener for the new anime button
+         $("#new-anime").on("click", function() {
+
+         //here I will store the API URL for random cat image in a variable
+         var apiKey = "c8Dv0ZF9uLvXrq0GBdyDf2NrrYTHBw8t"; //i put my giphy api key in a variable, will delete later when inserted in the URL
+         var giphyURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats"; //this may change with anime url?
+
+         //here I will perform an AJAX GET request to giphyURL
+         $.ajax ({
+             url: giphyURL,
+             method: "GET"
+         })
+         
+         //this is for when the data from the AJAX request comes back
+         .then(function(response) {
+
+            //saving the original image url property
+            var imageURL = response.data.image_original_url; //check where this url comes from 
+
+            //creating and storing the image tag, this creates an image tag with html body
+            var animeImage = $("<img>");
+
+            //setting the animeImage src attr to imageURL
+            animeImage.attr("src", imageURL);
+            animeImage.attr("alt", "anime");
+
+            //prepend the animeImage to the images div on html
+            $("#images").prepend(animeImage);
+         });
+        });
+
+         </script>
+
+
+
+    
+</body>
+</html>
